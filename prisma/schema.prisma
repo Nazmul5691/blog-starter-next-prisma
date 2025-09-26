@@ -15,6 +15,52 @@ datasource db {
 }
 
 
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  USER
+}
+
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  BLOCK
+}
+
+
+
 model User {
   id Int @id @default(autoincrement())
+  name String
+  email String
+  password String
+  role Role @default(USER)
+  phone String
+  picture String?
+  status UserStatus @default(ACTIVE)
+  isVerified Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
 }
+
+
+model Post {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  thumbnail String?
+  isFeatured Boolean @default(false)
+  tags String[]
+  view Int @default(0)
+  authorId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+
+
+

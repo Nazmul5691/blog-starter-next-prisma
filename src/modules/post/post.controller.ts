@@ -42,6 +42,17 @@ const getPostById = async(req: Request, res: Response) =>{
 }
 
 
+
+const getBlogStats = async(req: Request, res: Response) =>{
+    try {
+        const result = await PostService.getBlogStats()
+        res.status(200).send(result)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
+
 const updatePost = async(req: Request, res: Response) =>{
     try {
         const result = await PostService.updatePost(Number(req.params.id), req.body)
@@ -71,5 +82,6 @@ export const PostController = {
     getAllPost,
     getPostById,
     updatePost,
-    deletePost
+    deletePost,
+    getBlogStats
 }

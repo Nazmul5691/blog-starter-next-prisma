@@ -5,16 +5,26 @@ const createUser = async(req: Request, res: Response) =>{
     try {
         const result = await UserService.createUser(req.body);
 
-        res.send(result);
+        res.status(201).send(result);
 
     } catch (error) {
-        console.log(error);
+        res.status(500).send(error);
+    }
+}
+
+
+const getAllUsers = async(req: Request, res: Response) =>{
+    try {
+        const result = await UserService.getAllUsers()
+        res.status(201).send(result);
+    } catch (error) {
+        res.status(500).send(error);
     }
 }
 
 
 
-
 export const UserController = {
-    createUser
+    createUser,
+    getAllUsers
 }

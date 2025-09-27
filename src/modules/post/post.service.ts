@@ -17,6 +17,57 @@ const createPost = async(payload: Prisma.PostCreateInput): Promise<Post> =>{
     return result;
 }
 
+
+
+const getAllPost = async () =>{
+    const result = await prisma.post.findMany()
+    return result;
+}
+
+
+const getPostById = async(id: number) =>{
+    const result = await prisma.post.findUnique({
+        where: {
+            id
+        },
+        include: {
+            author: true
+        }
+    });
+    return result;
+}
+
+
+
+const updatePost = async(id: number, payload: Partial<Post>) =>{
+    const result = await prisma.post.update({
+        where: {
+            id
+        },
+        data: payload
+    });
+    return result;
+}
+
+
+
+const deletePost = async(id: number) =>{
+    const result = await prisma.post.delete({
+        where: {
+            id
+        }
+    });
+    return result;
+}
+
+
+
+
+
 export const PostService = {
-    createPost
+    createPost,
+    getAllPost,
+    getPostById,
+    updatePost,
+    deletePost
 }

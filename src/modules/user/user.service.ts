@@ -21,14 +21,43 @@ const getAllUsers = async() =>{
             createdAt: true,
             updatedAt: true,
             role: true,
-            status: true
-        }
+            status: true,
+            posts: true
+        },
+        orderBy: {
+            createdAt: 'desc'
+        },
+    
     })
+    return result;
+}
+
+
+
+const getUserById = async (id: number) =>{
+    const result = await prisma.user.findUnique({
+        where: {
+            id
+        },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            phone: true,
+            picture: true,
+            createdAt: true,
+            updatedAt: true,
+            role: true,
+            status: true,
+            posts: true
+        }
+    });
     return result;
 }
 
 
 export const UserService = {
     createUser,
-    getAllUsers
+    getAllUsers,
+    getUserById
 }
